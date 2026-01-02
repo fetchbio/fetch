@@ -1,18 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>My Profile | fetch.bio</title>
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="utf-8">
+<title>My Profile | fetch.bio</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="profile-card">
-    <div class="banner" id="banner"></div>
-    <img src="" id="pfp" class="pfp">
-    <h1 id="username">Username</h1>
-    <p id="bio">Bio goes here...</p>
-    <div id="links"></div>
+<div class="profile-container">
+
+  <div class="profile-card" id="profile-card">
+    <div class="profile-banner" id="profile-banner"></div>
+    <img src="" id="profile-pfp" class="profile-pfp">
+    <h1 id="profile-username">Your Name</h1>
+    <p id="profile-bio">Bio goes here...</p>
+    
+    <div id="social-links" class="social-links"></div>
+
+    <div class="discord-card" id="discord-card">
+      <img src="" id="discord-pfp" class="discord-pfp">
+      <div>
+        <p id="discord-username">Discord Username</p>
+        <p id="discord-status">Status</p>
+      </div>
+    </div>
+
+    <div class="stats-section">
+      <p>Total Profile Views: <span id="total-views">0</span></p>
+      <p>Total Links Clicked: <span id="total-clicks">0</span></p>
+    </div>
+
   </div>
-  <script type="module" src="js/profile.js"></script>
+
+</div>
+
+<script type="module" src="js/profile.js"></script>
 </body>
 </html>
