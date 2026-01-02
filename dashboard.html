@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>Dashboard | fetch.bio</title>
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="utf-8">
+<title>Dashboard | fetch.bio</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+
+<div class="dashboard-container">
+
+  <!-- PASSWORD LOGIN -->
   <div class="dashboard-card" id="login-card">
     <h2>Enter Password</h2>
     <input type="password" id="pass" placeholder="Password">
@@ -13,22 +18,45 @@
     <p id="login-msg"></p>
   </div>
 
+  <!-- EDITOR -->
   <div class="dashboard-card" id="editor-card" style="display:none;">
-    <h2>Edit Profile</h2>
-    <input id="username-input" placeholder="Username">
-    <input id="bio-input" placeholder="Bio">
-    <input id="pfp-input" placeholder="Profile Image URL">
-    <input id="banner-input" placeholder="Banner Image URL / Color">
-    <textarea id="links-input" placeholder="Links, one per line"></textarea>
+
+    <h2>Profile Info</h2>
+    <div class="section">
+      <label>Username</label>
+      <input id="username-input" placeholder="Username">
+      <label>Bio</label>
+      <textarea id="bio-input" placeholder="Bio"></textarea>
+    </div>
+
+    <h2>Media</h2>
+    <div class="section">
+      <label>Profile Picture</label>
+      <input type="file" id="pfp-upload" accept="image/*">
+      <img id="pfp-preview" class="preview">
+      <label>Banner</label>
+      <input type="file" id="banner-upload" accept="image/*">
+      <div id="banner-preview" class="banner-preview"></div>
+    </div>
+
+    <h2>Links</h2>
+    <div class="section">
+      <textarea id="links-input" placeholder="Title|URL per line"></textarea>
+    </div>
+
     <button id="save-btn">Save Profile</button>
     <p id="save-msg"></p>
 
     <h2>Profile Stats</h2>
-    <p>Total Profile Views: <span id="views">0</span></p>
-    <p>Total Links Clicked: <span id="clicks">0</span></p>
-    <p>Last Update: <span id="last-update">Never</span></p>
-  </div>
+    <div class="section stats-section">
+      <canvas id="viewsChart" height="100"></canvas>
+      <canvas id="clicksChart" height="100"></canvas>
+      <p>Last Update: <span id="last-update">Never</span></p>
+    </div>
 
-  <script type="module" src="js/dashboard.js"></script>
+  </div>
+</div>
+
+<script type="module" src="js/dashboard.js"></script>
 </body>
 </html>
