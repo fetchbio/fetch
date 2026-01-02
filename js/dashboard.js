@@ -6,11 +6,16 @@ const loginMsg = document.getElementById("login-msg")
 
 const usernameInput = document.getElementById("username-input")
 const bioInput = document.getElementById("bio-input")
+const usernameEffectInput = document.getElementById("username-effect")
 const pfpUpload = document.getElementById("pfp-upload")
 const pfpPreview = document.getElementById("pfp-preview")
 const bannerUpload = document.getElementById("banner-upload")
 const bannerPreview = document.getElementById("banner-preview")
+const backgroundInput = document.getElementById("background-input")
 const linksInput = document.getElementById("links-input")
+const discordUsernameInput = document.getElementById("discord-username-input")
+const discordStatusInput = document.getElementById("discord-status-input")
+const discordPfpInput = document.getElementById("discord-pfp-input")
 const saveBtn = document.getElementById("save-btn")
 const saveMsg = document.getElementById("save-msg")
 const lastUpdateEl = document.getElementById("last-update")
@@ -18,10 +23,9 @@ const lastUpdateEl = document.getElementById("last-update")
 // charts
 const viewsCtx = document.getElementById("viewsChart").getContext("2d")
 const clicksCtx = document.getElementById("clicksChart").getContext("2d")
-
 let viewsChart, clicksChart
 
-loginBtn.onclick = () => {
+loginBtn.onclick = ()=>{
     if(document.getElementById("pass").value === PASSWORD){
         loginCard.style.display="none"
         editorCard.style.display="block"
@@ -32,8 +36,8 @@ loginBtn.onclick = () => {
     }
 }
 
-// IMAGE PREVIEWS
-pfpUpload.onchange = e => {
+// Image previews
+pfpUpload.onchange = e=>{
     const file = e.target.files[0]
     if(file){
         const reader = new FileReader()
@@ -42,26 +46,31 @@ pfpUpload.onchange = e => {
     }
 }
 
-bannerUpload.onchange = e => {
+bannerUpload.onchange = e=>{
     const file = e.target.files[0]
     if(file){
         const reader = new FileReader()
-        reader.onload = ()=>{bannerPreview.style.background = `url('${reader.result}') center/cover`}
+        reader.onload = ()=>{bannerPreview.style.background=`url('${reader.result}') center/cover`}
         reader.readAsDataURL(file)
     }
 }
 
-// LOAD DATA
+// load profile data
 function loadData(){
     const data = JSON.parse(localStorage.getItem("profile"))||{}
     usernameInput.value = data.username||""
     bioInput.value = data.bio||""
-    linksInput.value = data.links ? data.links.map(l=>l).join("\n") : ""
-    if(data.pfp){pfpPreview.src = data.pfp}
-    if(data.banner){bannerPreview.style.background = data.banner}
+    usernameEffectInput.value = data.usernameEffect||"none"
+    linksInput.value = data.links ? data.links.join("\n") : ""
+    pfpPreview.src = data.pfp||""
+    bannerPreview.style.background = data.banner||""
+    backgroundInput.value = data.background||""
+    discordUsernameInput.value = data.discordUsername||""
+    discordStatusInput.value = data.discordStatus||""
+    discordPfpInput.value = data.discordPfp||""
 }
 
-// STATS
+// stats
 function loadStats(){
     const stats = JSON.parse(localStorage.getItem("stats"))||{views:0, clicks:0}
     lastUpdateEl.textContent = localStorage.getItem("lastUpdate")||"Never"
@@ -71,19 +80,23 @@ function loadStats(){
 
     if(viewsChart) viewsChart.destroy()
     if(clicksChart) clicksChart.destroy()
-
     viewsChart = new Chart(viewsCtx,{type:"bar",data:viewsData,options:{responsive:true,plugins:{legend:{display:false}}}})
     clicksChart = new Chart(clicksCtx,{type:"bar",data:clicksData,options:{responsive:true,plugins:{legend:{display:false}}}})
 }
 
-// SAVE DATA
+// save profile
 saveBtn.onclick = ()=>{
     const data = {
         username: usernameInput.value,
+        usernameEffect: usernameEffectInput.value,
         bio: bioInput.value,
+        pfp: pfpPreview.src||"",
+        banner: bannerPreview.style.background||"",
+        background: backgroundInput.value||"",
         links: linksInput.value.split("\n").filter(l=>l.trim()!==""),
-        pfp: pfpPreview.src || "",
-        banner: bannerPreview.style.background || ""
+        discordUsername: discordUsernameInput.value,
+        discordStatus: discordStatusInput.value,
+        discordPfp: discordPfpInput.value
     }
     localStorage.setItem("profile",JSON.stringify(data))
     localStorage.setItem("lastUpdate",new Date().toLocaleString())
