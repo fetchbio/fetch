@@ -10,7 +10,7 @@
 
 <div class="dashboard-container">
 
-  <!-- PASSWORD LOGIN -->
+  <!-- PASSWORD -->
   <div class="dashboard-card" id="login-card">
     <h2>Enter Password</h2>
     <input type="password" id="pass" placeholder="Password">
@@ -18,17 +18,26 @@
     <p id="login-msg"></p>
   </div>
 
-  <!-- EDITOR -->
+  <!-- DASHBOARD -->
   <div class="dashboard-card" id="editor-card" style="display:none;">
-
+    
+    <!-- PROFILE INFO -->
     <h2>Profile Info</h2>
     <div class="section">
       <label>Username</label>
       <input id="username-input" placeholder="Username">
+      <label>Username Effect</label>
+      <select id="username-effect">
+        <option value="none">None</option>
+        <option value="glow">Glow</option>
+        <option value="shadow">Shadow</option>
+        <option value="gradient">Gradient</option>
+      </select>
       <label>Bio</label>
       <textarea id="bio-input" placeholder="Bio"></textarea>
     </div>
 
+    <!-- MEDIA -->
     <h2>Media</h2>
     <div class="section">
       <label>Profile Picture</label>
@@ -37,22 +46,37 @@
       <label>Banner</label>
       <input type="file" id="banner-upload" accept="image/*">
       <div id="banner-preview" class="banner-preview"></div>
+      <label>Background (color, gradient, or image URL)</label>
+      <input type="text" id="background-input" placeholder="e.g. #111 or url(image)">
     </div>
 
-    <h2>Links</h2>
+    <!-- SOCIAL LINKS -->
+    <h2>Social Links</h2>
     <div class="section">
-      <textarea id="links-input" placeholder="Title|URL per line"></textarea>
+      <textarea id="links-input" placeholder="Platform|URL per line, e.g. Instagram|https://..."></textarea>
     </div>
 
-    <button id="save-btn">Save Profile</button>
-    <p id="save-msg"></p>
+    <!-- DISCORD -->
+    <h2>Discord Card</h2>
+    <div class="section">
+      <label>Discord Username</label>
+      <input id="discord-username-input" placeholder="Username#0000">
+      <label>Discord Status</label>
+      <input id="discord-status-input" placeholder="Online / Idle / Do not disturb">
+      <label>Discord Avatar URL</label>
+      <input id="discord-pfp-input" placeholder="Avatar URL or upload">
+    </div>
 
+    <!-- STATS -->
     <h2>Profile Stats</h2>
     <div class="section stats-section">
       <canvas id="viewsChart" height="100"></canvas>
       <canvas id="clicksChart" height="100"></canvas>
       <p>Last Update: <span id="last-update">Never</span></p>
     </div>
+
+    <button id="save-btn">Save Profile</button>
+    <p id="save-msg"></p>
 
   </div>
 </div>
